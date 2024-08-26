@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FunRestController {
+
     @Value("${my.firstname}")
     private String firstname;
 
