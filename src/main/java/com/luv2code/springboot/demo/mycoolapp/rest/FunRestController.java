@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FunRestController {
+
     @Value("${my.firstname}")
     private String firstname;
 
@@ -18,6 +19,7 @@ public class FunRestController {
         return "<h1>Hello World!</h1>";
     }
 
+    // Expose "/name" that return "Hello World! My name is Yong Yangyuen."
     @GetMapping("/name")
     public String introduce() {
         return sayHello() + "My name is " + firstname + " " + lastname + ".";
