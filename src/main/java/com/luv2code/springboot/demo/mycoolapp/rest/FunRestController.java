@@ -13,6 +13,9 @@ public class FunRestController {
     @Value("${my.lastname}")
     private String lastname;
 
+    @Value("${learning.topic}")
+    private String learningTopic;
+
     // Expose "/" that return "Hello World!"
     @GetMapping("/")
     public String sayHello() {
@@ -23,6 +26,11 @@ public class FunRestController {
     @GetMapping("/name")
     public String introduce() {
         return sayHello() + "My name is " + firstname + " " + lastname + ".";
+    }
+
+    @GetMapping("/topic")
+    public String getTopic() {
+        return "Learning Topic: " + "<h1>" + learningTopic + "</h1>";
     }
 
 }
