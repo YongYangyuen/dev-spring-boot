@@ -1,6 +1,7 @@
 package com.luv2code.springboot.demo.mycoolapp.controllers;
 
 import com.luv2code.springboot.demo.mycoolapp.components.CoachComponent;
+import com.luv2code.springboot.demo.utils.Teacher;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class FunRestController {
     private final CoachComponent coachComponent;
+
+    private final Teacher teacher;
 
     @Value("${my.firstname}")
     private String firstname;
@@ -20,8 +23,9 @@ public class FunRestController {
 
     // @Autowired is no need if you have only one constructor.
 //    @Autowired
-    public FunRestController(CoachComponent coachComponent) {
+    public FunRestController(CoachComponent coachComponent, Teacher teacher) {
         this.coachComponent = coachComponent;
+        this.teacher = teacher;
     }
 
     // Expose "/" that return "Hello World!"
@@ -44,5 +48,15 @@ public class FunRestController {
     @GetMapping("/dailyWorkout")
     public String getDailyWorkout() {
         return coachComponent.getDailyWorkout();
+    }
+
+    @GetMapping("/teach/math")
+    public String teachMath() {
+        return teacher.teachMath();
+    }
+
+    @GetMapping("/teach/comp")
+    public String teachComp() {
+        return teacher.teachComp();
     }
 }
