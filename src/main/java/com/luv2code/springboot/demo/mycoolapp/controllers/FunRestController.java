@@ -1,7 +1,9 @@
 package com.luv2code.springboot.demo.mycoolapp.controllers;
 
 import com.luv2code.springboot.demo.mycoolapp.components.CoachComponent;
+import com.luv2code.springboot.demo.utils.Student;
 import com.luv2code.springboot.demo.utils.Teacher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +14,9 @@ public class FunRestController {
 
     private final Teacher teacher;
 
+    // Setter Injection: can't assign field as a final like Constructor Injection.
+    private Student student;
+
     @Value("${my.firstname}")
     private String firstname;
 
@@ -21,11 +26,17 @@ public class FunRestController {
     @Value("${learning.topic}")
     private String learningTopic;
 
-    // @Autowired is no need if you have only one constructor.
+    // Constructor Injection (for required dependencies): @Autowired is optional (no need) if you have only one constructor.
 //    @Autowired
     public FunRestController(CoachComponent coachComponent, Teacher teacher) {
         this.coachComponent = coachComponent;
         this.teacher = teacher;
+    }
+
+    // Setter Injection (for optional dependencies): @Autowired is needed for every setter method, and setter method name can be any name for Setter Injection.
+    @Autowired
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     // Expose "/" that return "Hello World!"
@@ -58,5 +69,15 @@ public class FunRestController {
     @GetMapping("/teach/comp")
     public String teachComp() {
         return teacher.teachComp();
+    }
+
+    @GetMapping("/study/math")
+    public String studyMath() {
+        return student.studyMath();
+    }
+
+    @GetMapping("/study/comp")
+    public String studyComp() {
+        return student.studyComp();
     }
 }
