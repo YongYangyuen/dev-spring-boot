@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FunRestController {
+    private final Coach mainCoach;
+
     private final Coach breakingCoach;
 
     private final Coach baseballCoach;
@@ -31,9 +33,11 @@ public class FunRestController {
 
     // Constructor Injection (for required dependencies): @Autowired is optional (no need) if you have only one constructor.
 //    @Autowired
-    public FunRestController(@Qualifier("breakingCoachImpl") Coach breakingCoach,
+    public FunRestController(Coach mainCoach,
+                             @Qualifier("breakingCoachImpl") Coach breakingCoach,
                              @Qualifier("baseballCoachImpl") Coach baseballCoach,
                              Teacher teacher) {
+        this.mainCoach = mainCoach;
         this.breakingCoach = breakingCoach;
         this.baseballCoach = baseballCoach;
         this.teacher = teacher;
@@ -60,6 +64,11 @@ public class FunRestController {
     @GetMapping("/topic")
     public String getTopic() {
         return "Learning Topic: " + "<h1>" + learningTopic + "</h1>";
+    }
+
+    @GetMapping("/dailyExercise")
+    public String getDailyExercise() {
+        return mainCoach.getDailyWorkout();
     }
 
     @GetMapping("/dailyBreaking")
