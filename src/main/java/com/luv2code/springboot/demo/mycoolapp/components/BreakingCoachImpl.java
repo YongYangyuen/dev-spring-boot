@@ -1,0 +1,11 @@
+package com.luv2code.springboot.demo.mycoolapp.components;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class BreakingCoachImpl implements Coach {
+    @Override
+    public String getDailyWorkout() {
+        return "Spend 30 minutes in Powermoves practice.";
+    }
+}

@@ -1,16 +1,19 @@
 package com.luv2code.springboot.demo.mycoolapp.controllers;
 
-import com.luv2code.springboot.demo.mycoolapp.components.CoachComponent;
+import com.luv2code.springboot.demo.mycoolapp.components.Coach;
 import com.luv2code.springboot.demo.utils.Student;
 import com.luv2code.springboot.demo.utils.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FunRestController {
-    private final CoachComponent coachComponent;
+    private final Coach breakingCoach;
+
+    private final Coach baseballCoach;
 
     private final Teacher teacher;
 
@@ -28,8 +31,11 @@ public class FunRestController {
 
     // Constructor Injection (for required dependencies): @Autowired is optional (no need) if you have only one constructor.
 //    @Autowired
-    public FunRestController(CoachComponent coachComponent, Teacher teacher) {
-        this.coachComponent = coachComponent;
+    public FunRestController(@Qualifier("breakingCoachImpl") Coach breakingCoach,
+                             @Qualifier("baseballCoachImpl") Coach baseballCoach,
+                             Teacher teacher) {
+        this.breakingCoach = breakingCoach;
+        this.baseballCoach = baseballCoach;
         this.teacher = teacher;
     }
 
@@ -56,9 +62,14 @@ public class FunRestController {
         return "Learning Topic: " + "<h1>" + learningTopic + "</h1>";
     }
 
-    @GetMapping("/dailyWorkout")
-    public String getDailyWorkout() {
-        return coachComponent.getDailyWorkout();
+    @GetMapping("/dailyBreaking")
+    public String getDailyBreaking() {
+        return breakingCoach.getDailyWorkout();
+    }
+
+    @GetMapping("/dailyBaseball")
+    public String getDailyBaseball() {
+        return baseballCoach.getDailyWorkout();
     }
 
     @GetMapping("/teach/math")
