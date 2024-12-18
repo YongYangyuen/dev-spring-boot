@@ -4,6 +4,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StudentImpl implements Student {
+    public StudentImpl() {
+        System.out.println("In constructor: " + getClass().getSimpleName());
+    }
+
     @Override
     public String studyMath() {
         return "0 + 0 = 0 and 0 + 1 = 1 and 1 + 0 = 1";
