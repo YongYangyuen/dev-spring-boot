@@ -15,8 +15,6 @@ public class FunRestController {
 
     private final Coach breakingCoach;
 
-    private final Coach baseballCoach;
-
     private final Teacher teacher;
 
     // Setter Injection: can't assign field as a final like Constructor Injection.
@@ -35,11 +33,11 @@ public class FunRestController {
 //    @Autowired
     public FunRestController(Coach mainCoach,
                              @Qualifier("breakingCoachImpl") Coach breakingCoach,
-                             @Qualifier("baseballCoachImpl") Coach baseballCoach,
                              Teacher teacher) {
+        System.out.println("In constructor " + getClass().getSimpleName());
+
         this.mainCoach = mainCoach;
         this.breakingCoach = breakingCoach;
-        this.baseballCoach = baseballCoach;
         this.teacher = teacher;
     }
 
@@ -74,11 +72,6 @@ public class FunRestController {
     @GetMapping("/dailyBreaking")
     public String getDailyBreaking() {
         return breakingCoach.getDailyWorkout();
-    }
-
-    @GetMapping("/dailyBaseball")
-    public String getDailyBaseball() {
-        return baseballCoach.getDailyWorkout();
     }
 
     @GetMapping("/teach/math")
