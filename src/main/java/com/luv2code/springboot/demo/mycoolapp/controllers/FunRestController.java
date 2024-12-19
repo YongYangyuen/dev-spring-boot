@@ -15,6 +15,8 @@ public class FunRestController {
 
     private final Coach breakingCoach;
 
+    private final Coach anotherBreakingCoach;
+
     private final Teacher teacher;
 
     // Setter Injection: can't assign field as a final like Constructor Injection.
@@ -33,11 +35,13 @@ public class FunRestController {
 //    @Autowired
     public FunRestController(Coach mainCoach,
                              @Qualifier("breakingCoachImpl") Coach breakingCoach,
+                             @Qualifier("breakingCoachImpl") Coach anotherBreakingCoach,
                              Teacher teacher) {
         System.out.println("In constructor " + getClass().getSimpleName());
 
         this.mainCoach = mainCoach;
         this.breakingCoach = breakingCoach;
+        this.anotherBreakingCoach = anotherBreakingCoach;
         this.teacher = teacher;
     }
 
@@ -92,5 +96,12 @@ public class FunRestController {
     @GetMapping("/study/comp")
     public String studyComp() {
         return student.studyComp();
+    }
+
+    @GetMapping("/isTheSameBreakingCoach")
+    public String isTheSameBreakingCoachBean() {
+        // Singleton: true (Shared Memories by default)
+        // Prototype: false (Not shared memories)
+        return "Comparing Beans: breakingCoach == anotherBreakingCoach, " + (breakingCoach == anotherBreakingCoach);
     }
 }
