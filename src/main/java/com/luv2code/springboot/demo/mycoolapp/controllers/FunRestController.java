@@ -100,8 +100,8 @@ public class FunRestController {
 
     @GetMapping("/isTheSameBreakingCoach")
     public String isTheSameBreakingCoachBean() {
-        // Singleton: true (Shared Memories by default)
-        // Prototype: false (Not shared memories)
+        // Singleton: true (Same Bean, shared Memories by default.)
+        // Prototype: false (Not the same Bean, not shared memories.)
         return "Comparing Beans: breakingCoach == anotherBreakingCoach, " + (breakingCoach == anotherBreakingCoach);
     }
 }
