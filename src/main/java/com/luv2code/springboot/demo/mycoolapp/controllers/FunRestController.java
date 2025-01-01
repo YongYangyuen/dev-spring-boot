@@ -17,6 +17,8 @@ public class FunRestController {
 
     private final Coach anotherBreakingCoach;
 
+    private final Coach swimmingCoach;
+
     private final Teacher teacher;
 
     // Setter Injection: can't assign field as a final like Constructor Injection.
@@ -34,14 +36,16 @@ public class FunRestController {
     // Constructor Injection (for required dependencies): @Autowired is optional (no need) if you have only one constructor.
 //    @Autowired
     public FunRestController(Coach mainCoach,
-                             @Qualifier("breakingCoachImpl") Coach breakingCoach,
-                             @Qualifier("breakingCoachImpl") Coach anotherBreakingCoach,
+                             @Qualifier("breakingCoach") Coach breakingCoach,
+                             @Qualifier("breakingCoach") Coach anotherBreakingCoach,
+                             @Qualifier("aquaticCoach") Coach swimmingCoach, // The Bean ID is the method name "swimmingCoach" in the @Configuration by default if you don't configure Bean ID after @Bean "aquaticCoach".
                              Teacher teacher) {
         System.out.println("In constructor " + getClass().getSimpleName());
 
         this.mainCoach = mainCoach;
         this.breakingCoach = breakingCoach;
         this.anotherBreakingCoach = anotherBreakingCoach;
+        this.swimmingCoach = swimmingCoach;
         this.teacher = teacher;
     }
 
@@ -103,5 +107,10 @@ public class FunRestController {
         // Singleton: true (The same Bean, shared Memories by default.)
         // Prototype: false (Not the same Bean, not shared memories.)
         return "Comparing Beans: breakingCoach == anotherBreakingCoach, " + (breakingCoach == anotherBreakingCoach);
+    }
+
+    @GetMapping("/dailySwimming")
+    public String getDailySwimming() {
+        return swimmingCoach.getDailyWorkout();
     }
 }
