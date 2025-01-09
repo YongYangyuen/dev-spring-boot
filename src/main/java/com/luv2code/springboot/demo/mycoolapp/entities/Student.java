@@ -23,7 +23,7 @@ public class Student {
     @Column(name = "email")
     private String email;
 
-    public Student(String firstName, String lastName, String email) {
+    public Student(String firstName, String lastName, String email) { // No need id because it's generated automatically by database.
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
