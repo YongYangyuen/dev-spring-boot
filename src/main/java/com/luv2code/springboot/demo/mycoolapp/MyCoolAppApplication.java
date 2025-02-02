@@ -21,8 +21,10 @@ public class MyCoolAppApplication {
         return runner -> {
             System.out.println("Hello World.");
 
-            createStudent(studentDAO);
-            createMultipleStudents(studentDAO);
+//            createStudent(studentDAO);
+//            createMultipleStudents(studentDAO);
+
+            readStudent(studentDAO, 2);
         };
     }
 
@@ -56,6 +58,14 @@ public class MyCoolAppApplication {
         System.out.println("Saved student1. Generated id: " + student1.getId());
         System.out.println("Saved student2. Generated id: " + student2.getId());
         System.out.println("Saved student3. Generated id: " + student3.getId());
+    }
+
+    private void readStudent(StudentDAO studentDAO, Integer id) {
+        // Read the student by id.
+        System.out.println("Reading student id " + id + " ...");
+        Student student = studentDAO.findById(id);
+
+        System.out.println("The student #" + id + ": " + student);
     }
 
 }
