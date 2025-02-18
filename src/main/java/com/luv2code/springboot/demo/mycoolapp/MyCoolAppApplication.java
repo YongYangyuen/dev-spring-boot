@@ -25,13 +25,17 @@ public class MyCoolAppApplication {
             System.out.println("Hello World.");
             System.out.println("==================================================");
 
+            // CREATE (C)
 //            createStudent(studentDAO);
 //            createMultipleStudents(studentDAO);
 
+            // READ (R)
 //            readStudent(studentDAO, 2);
-//            readAllStudents(studentDAO);
-            readStudentsByLastName(studentDAO, "Yangyuen");
-            updateStudent(studentDAO);
+            readAllStudents(studentDAO);
+//            readStudentsByLastName(studentDAO, "Yangyuen");
+
+            // UPDATE (U)
+//            updateStudent(studentDAO);
         };
     }
 
