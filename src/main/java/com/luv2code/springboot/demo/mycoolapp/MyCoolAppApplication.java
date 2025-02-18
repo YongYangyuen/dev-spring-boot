@@ -31,6 +31,7 @@ public class MyCoolAppApplication {
 //            readStudent(studentDAO, 2);
 //            readAllStudents(studentDAO);
             readStudentsByLastName(studentDAO, "Yangyuen");
+            updateStudent(studentDAO);
         };
     }
 
@@ -66,7 +67,7 @@ public class MyCoolAppApplication {
         System.out.println("Saved student3. Generated id: " + student3.getId());
     }
 
-    private void readStudent(StudentDAO studentDAO, Integer id) {
+    private void readStudentById(StudentDAO studentDAO, Integer id) {
         // Read the student by id.
         System.out.println("Reading student id " + id + " ...");
         Student student = studentDAO.findById(id);
@@ -98,6 +99,24 @@ public class MyCoolAppApplication {
                 System.out.println("The student #" + student.getId() + ": " + student);
             }
         }
+    }
+
+    private void updateStudent(StudentDAO studentDAO) {
+        // Retrieve student based on the id: primary key.
+        int studentId = 1;
+        System.out.println("Getting student #" + studentId + " ...");
+        Student student = studentDAO.findById(studentId);
+        System.out.println("Found student #" + student.getId() + ": " + student);
+
+        // Change last name to "Blossom".
+        System.out.println("Updating student ...");
+        student.setLastName("Yangyuen");
+
+        // Update the student.
+        studentDAO.update(student);
+
+        // Display the updated student.
+        System.out.println("Updated student #" + student.getId() + ": " + student);
     }
 
 }
