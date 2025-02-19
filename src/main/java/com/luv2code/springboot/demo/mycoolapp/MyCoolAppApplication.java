@@ -36,6 +36,9 @@ public class MyCoolAppApplication {
 
             // UPDATE (U)
 //            updateStudent(studentDAO);
+
+            // DELETE (D)
+            deleteStudent(studentDAO, 1);
         };
     }
 
@@ -121,6 +124,14 @@ public class MyCoolAppApplication {
 
         // Display the updated student.
         System.out.println("Updated student #" + student.getId() + ": " + student);
+    }
+
+    private void deleteStudent(StudentDAO studentDAO, Integer id) {
+        System.out.println("Deleting student #" + id + " ...");
+        studentDAO.delete(id);
+
+        System.out.println("Deleted student #" + id);
+        readAllStudents(studentDAO);
     }
 
 }
