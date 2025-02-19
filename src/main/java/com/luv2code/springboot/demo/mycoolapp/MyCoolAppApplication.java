@@ -38,7 +38,8 @@ public class MyCoolAppApplication {
 //            updateStudent(studentDAO);
 
             // DELETE (D)
-            deleteStudent(studentDAO, 1);
+//            deleteStudent(studentDAO, 1);
+            deleteAllStudents(studentDAO);
         };
     }
 
@@ -131,7 +132,12 @@ public class MyCoolAppApplication {
         studentDAO.delete(id);
 
         System.out.println("Deleted student #" + id);
-        readAllStudents(studentDAO);
     }
 
+    private void deleteAllStudents(StudentDAO studentDAO) {
+        System.out.println("Deleting all students ...");
+        int numRowsDeleted = studentDAO.deleteAll();
+
+        System.out.println("Deleted " + numRowsDeleted + " students.");
+    }
 }
