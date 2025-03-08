@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentErrorResponse {
+public class MyCoolAppErrorResponse {
     private int status;
     private String message;
     private long timeStamp;
