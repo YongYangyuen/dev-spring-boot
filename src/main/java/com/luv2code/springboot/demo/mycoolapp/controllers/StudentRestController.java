@@ -2,12 +2,13 @@ package com.luv2code.springboot.demo.mycoolapp.controllers;
 
 import com.luv2code.springboot.demo.mycoolapp.daos.StudentDAO;
 import com.luv2code.springboot.demo.mycoolapp.entities.Student;
+import com.luv2code.springboot.demo.mycoolapp.exceptions.StudentNotFoundException;
+import com.luv2code.springboot.demo.mycoolapp.models.StudentErrorResponse;
 import com.luv2code.springboot.demo.mycoolapp.models.StudentResponse;
 import jakarta.annotation.PostConstruct;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,5 +51,26 @@ public class StudentRestController {
     @GetMapping("/students/secret")
     public StudentResponse getSecretStudent() {
         return new StudentResponse(students);
+    }
+
+    @GetMapping("students/secret/{id}")
+    public StudentResponse getSecretStudentById(@PathVariable int id) {
+        try {
+            return new StudentResponse(List.of(students.get(id)));
+        } catch (IndexOutOfBoundsException ex) {
+            throw new StudentNotFoundException("The student #" + id + " was not found.", ex);
+        }
+    }
+
+    // Add an exception handler using @ExceptionHandler.
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException ex) {
+        return new ResponseEntity<>(new StudentErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage(), System.currentTimeMillis()), HttpStatus.NOT_FOUND);
+    }
+
+    // Add another exception handler to catch any exception (catch all).
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleAllException(Exception ex) {
+        return new ResponseEntity<>(new StudentErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), System.currentTimeMillis()), HttpStatus.BAD_REQUEST);
     }
 }
