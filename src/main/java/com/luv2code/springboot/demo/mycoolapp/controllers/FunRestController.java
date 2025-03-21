@@ -6,10 +6,14 @@ import com.luv2code.springboot.demo.utils.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/king")
 public class FunRestController {
     private final Coach mainCoach;
 
@@ -56,9 +60,9 @@ public class FunRestController {
     }
 
     // Expose "/" that return "Hello World!"
-    @GetMapping("/")
+    @GetMapping("/hello")
     public String sayHello() {
-        return "<h1>Hello World!</h1>";
+        return "<h1>Hello World!</h1>" + "<br>HTTP Status Code: " + HttpStatus.OK;
     }
 
     // Expose "/name" that return "Hello World! My name is Yong Yangyuen."
