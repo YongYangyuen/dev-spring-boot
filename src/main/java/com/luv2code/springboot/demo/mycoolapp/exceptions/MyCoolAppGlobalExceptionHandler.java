@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class MyCoolAppGlobalExceptionHandler {
     // Add an exception handler using @ExceptionHandler.
     @ExceptionHandler
-    public ResponseEntity<MyCoolAppErrorResponse> handleException(StudentNotFoundException ex) {
+    public ResponseEntity<MyCoolAppErrorResponse> handleException(DataNotFoundException ex) {
         return new ResponseEntity<>(new MyCoolAppErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage(), System.currentTimeMillis()), HttpStatus.NOT_FOUND);
     }
 

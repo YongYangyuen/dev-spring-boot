@@ -1,4 +1,4 @@
-package com.luv2code.springboot.demo.mycoolapp.models;
+package com.luv2code.springboot.demo.mycoolapp.models.employee;
 
 import com.luv2code.springboot.demo.mycoolapp.entities.Employee;
 import lombok.AllArgsConstructor;

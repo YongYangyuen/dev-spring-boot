@@ -2,7 +2,7 @@ package com.luv2code.springboot.demo.mycoolapp.controllers;
 
 import com.luv2code.springboot.demo.mycoolapp.daos.StudentDAO;
 import com.luv2code.springboot.demo.mycoolapp.entities.Student;
-import com.luv2code.springboot.demo.mycoolapp.exceptions.StudentNotFoundException;
+import com.luv2code.springboot.demo.mycoolapp.exceptions.DataNotFoundException;
 import com.luv2code.springboot.demo.mycoolapp.models.StudentResponse;
 import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,7 +58,7 @@ public class StudentRestController {
         try {
             return new StudentResponse(List.of(students.get(id)));
         } catch (IndexOutOfBoundsException ex) {
-            throw new StudentNotFoundException("The student #" + id + " was not found.", ex);
+            throw new DataNotFoundException("The student #" + id + " was not found.", ex);
         }
     }
 }
