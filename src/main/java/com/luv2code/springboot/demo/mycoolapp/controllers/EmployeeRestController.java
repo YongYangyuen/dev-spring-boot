@@ -3,7 +3,6 @@ package com.luv2code.springboot.demo.mycoolapp.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.luv2code.springboot.demo.mycoolapp.entities.Employee;
-import com.luv2code.springboot.demo.mycoolapp.exceptions.DataNotFoundException;
 import com.luv2code.springboot.demo.mycoolapp.models.employee.EmployeeRequest;
 import com.luv2code.springboot.demo.mycoolapp.models.employee.EmployeeResponse;
 import com.luv2code.springboot.demo.mycoolapp.services.EmployeeService;
@@ -34,11 +33,7 @@ public class EmployeeRestController {
 
     @GetMapping("/employees/{id}")
     public EmployeeResponse getEmployeeById(@PathVariable int id) {
-        Employee employee = employeeService.findById(id);
-        if (employee == null) {
-            throw new DataNotFoundException("The employee #" + id + " was not found.");
-        }
-
+        Employee employee = employeeService.findById(id); // No need to handle null: it's not null for sure because we handle it in the service layer instead.
         List<Employee> employees = new ArrayList<>();
         employees.add(employee);
 
@@ -80,10 +75,7 @@ public class EmployeeRestController {
     // Map<String, Object> is used for dynamic or unknown payload.
     @PatchMapping("/employees/{id}")
     public EmployeeResponse patchEmployee(@PathVariable int id, @RequestBody Map<String, Object> patchPayload) {
-        Employee employee = employeeService.findById(id);
-        if (employee == null) {
-            throw new DataNotFoundException("The employee #" + id + " was not found.");
-        }
+        Employee employee = employeeService.findById(id); // No need to handle null: it's not null for sure because we handle it in the service layer instead.
         if (patchPayload.containsKey("id")) {
             throw new RuntimeException("Employee id is not allowed in request body - #" + id);
         }
@@ -98,10 +90,7 @@ public class EmployeeRestController {
 
     @DeleteMapping("/employees/{id}")
     public String deleteEmployee(@PathVariable int id) {
-        Employee employee = employeeService.findById(id);
-        if (employee == null) {
-            throw new DataNotFoundException("The employee #" + id + " was not found.");
-        }
+        Employee employee = employeeService.findById(id); // No need to handle null: it's not null for sure because we handle it in the service layer instead.
 
         employeeService.deleteById(id);
 

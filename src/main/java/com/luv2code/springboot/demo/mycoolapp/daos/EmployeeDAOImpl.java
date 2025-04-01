@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+// Make use of Spring Data JPA instead of DAO in mvp20.
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
     private final EntityManager entityManager;
