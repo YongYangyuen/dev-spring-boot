@@ -4,6 +4,7 @@ import com.luv2code.springboot.demo.mycoolapp.entities.Employee;
 
 import java.util.List;
 
+// Make use of Spring Data JPA instead of DAO in mvp20.
 public interface EmployeeDAO {
     List<Employee> findAll();
 
